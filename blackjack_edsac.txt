@@ -1,7 +1,86 @@
-[ Lizette, Blanca, Tyson ]
+[ BLACKJACK IN EDSAC ]
+[ ==================== ]
+[ Memory Map:
+   0-51:   Deck array (52 cards)
+   52:     Deck pointer
+   53:     Player total
+   54:     Dealer total
+   55:     Cards dealt counter
+   56:     Current card value
+]
+
 T 64 K
-Z    F [ just a bunch of stops to play with the dial ]
+
+[ ===== INITIALIZE DECK ===== ]
+[ Load 0 to accumulator ]
+Z
+T 52 K     [ Initialize deck pointer to 0 ]
+T 53 K     [ Initialize player total ]
+T 54 K     [ Initialize dealer total ]
+
+[ ===== FILL DECK 0-51 ===== ]
+[ Counter at 55 ]
+T 55 K
+
+[ Loop: store card i at address i ]
+LOOP:
+A 55 K     [ Load counter ]
+T 0 K      [ Store at deck address (will modify this with address modification) ]
+
+[ Increment counter ]
+A 55 K
+A 1 D
+T 55 K
+
+[ Check if counter >= 52 ]
+A 55 K
+S 52 D
+G DEALER K [ If >= 52, go to dealer ]
+
+[ Loop back - in real EDSAC, address of "T 0 K" would be modified ]
+A 64 K
+E LOOP K
+
+[ ===== DEALER PLAYS ===== ]
+DEALER:
+[ Dealer hits until >= 17 ]
+A 54 K     [ Load dealer total ]
+S 17 D     [ Subtract 17 ]
+G COMPARE K [ If >= 17, compare ]
+
+[ Dealer hits - draw card ]
+A 52 K
+A 1 D
+T 52 K     [ Increment deck pointer ]
+
+[ Add card value to dealer total (simplified: card = pointer mod 13 + 1) ]
+A 52 K
+T 56 K
+
+A 54 K
+A 56 K
+T 54 K
+
+[ Loop back to dealer check ]
+A 64 K
+E DEALER K
+
+[ ===== COMPARE HANDS ===== ]
+COMPARE:
+[ Compare player vs dealer ]
+A 53 K     [ Player total ]
+S 54 K     [ Subtract dealer total ]
+
+G PLAYER_WIN K  [ If player > dealer, player wins ]
+E DRAW K        [ If equal, draw ]
+
+[ Dealer wins ]
 Z    F
+
+[ Player wins ]
+PLAYER_WIN:
 Z    F
+
+[ Draw ]
+DRAW:
 Z    F
-E 64 K PF 
