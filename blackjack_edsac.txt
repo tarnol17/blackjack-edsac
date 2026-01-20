@@ -1,0 +1,7 @@
+[ Lizette, Blanca, Tyson ]
+T 64 K
+Z    F [ just a bunch of stops to play with the dial ]
+Z    F
+Z    F
+Z    F
+E 64 K PF 
