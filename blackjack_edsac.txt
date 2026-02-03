@@ -7,7 +7,7 @@ PFGKIFAFRDLFUFOFE@A6FG@E8FEZPF
 @&#!
 ..PK
 
-T 47 K [ Set M ]
+T 64 K [ Set M ]
 P  7 @
 T    Z [ Restore theta ]
 T    F [ 0: Clear ACC]
@@ -41,4 +41,4 @@ P      F
 A      F
 
 
-
+E 64 K P F
