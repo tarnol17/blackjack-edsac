@@ -3,11 +3,13 @@ T56K
 [M3]
 PFGKIFAFRDLFUFOFE@A6FG@E8FEZPF
 @&#!!!!!!!!!!!!!*BLACKJACK!EDSAC
-@&#!!!!!!!*!!!!!!!!BY!TEAM!TBD
-@&#!
+@&#!!!!!!!*!!!!!!!!BY!TEAM!TBD!!!
 ..PK
 
-T 64 K [ Set M ]
+
+T 64 K
+G    K
+T 47 K [ Set M ]
 P  7 @
 T    Z [ Restore theta ]
 T    F [ 0: Clear ACC]
