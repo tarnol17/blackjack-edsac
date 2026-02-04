@@ -40,5 +40,68 @@ O   4  @
 P      F
 A      F
 
+[DECK POINTER]
+T 180K
+G 0
+T 0@
+
+[STORED DECK DATA]
+T 200 K
+[SUIT 1]
+G 1 T0@
+G 2 T1@
+G 3 T2@
+G 4 T3@
+G 5 T4@
+G 6 T5@
+G 7 T6@
+G 8 T7@
+G 9 T8@
+G 10 T9@
+G 11 T10@
+G 12 T11@
+G 13 T12@
+[SUIT 2]
+G 1 T13@
+G 2 T14@
+G 3 T15@
+G 4 T16@
+G 5 T17@
+G 6 T18@
+G 7 T19@
+G 8 T20@
+G 9 T21@
+G 10 T22@
+G 11 T23@
+G 12 T24@
+G 13 T25@
+[SUIT 3]
+G 1 T26@
+G 2 T27@
+G 3 T28@
+G 4 T29@
+G 5 T30@
+G 6 T31@
+G 7 T32@
+G 8 T33@
+G 9 T34@
+G 10 T35@
+G 11 T36@
+G 12 T37@
+G 13 T38@
+[SUIT 4]
+G 1 T39@
+G 2 T40@
+G 3 T41@
+G 4 T42@
+G 5 T43@
+G 6 T44@
+G 7 T45@
+G 8 T46@
+G 9 T47@
+G 10 T48@
+G 11 T49@
+G 12 T50@
+G 13 T51@  
 
 E 64 K P F
