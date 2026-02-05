@@ -3,13 +3,11 @@ T56K
 [M3]
 PFGKIFAFRDLFUFOFE@A6FG@E8FEZPF
 @&#!!!!!!!!!!!!!*BLACKJACK!EDSAC
-@&#!!!!!!!*!!!!!!!!BY!TEAM!TBD!!!
+@&#!!!!!!!*!!!!!!!!BY!TEAM!TBD
+@&#!
 ..PK
 
-
-T 64 K
-G    K
-T 47 K [ Set M ]
+T 64 K [ Set M ]
 P  7 @
 T    Z [ Restore theta ]
 T    F [ 0: Clear ACC]
@@ -31,16 +29,6 @@ G   0@ [ M(8) - menu item 8]
 G   0@ [ M(9) - menu item 9]
 G   0@ [ M(10) - menu item 10]
 
-
-
-T 90 K
-[ Print A ]
-G      K
-A   3  F [ 0 build the link ]
-T   3  @ [ 1 plant the link ]
-O   4  @
-P      F
-A      F
 
 
 [DECK POINTER]
@@ -106,6 +94,144 @@ G 10 T48@
 G 11 T49@
 G 12 T50@
 G 13 T51@
+
+[DRAW CARD]
+T 300K
+G 180@ [load deck pointer]
+A 200 [add deck base]
+T 0@ [store effective address]
+
+G 0@ [load card value]
+T 181@ [store drawn card]
+
+[advance pointer by 3]
+G 180@
+A 3
+T 180@
+
+[if pointer >= 52, subtract 52]
+G 180@
+S 52
+T 1@ [temp store]
+
+G 1@
+P 302@ [if negative skip correction]
+
+G 180@
+S 52
+T 180@
+
+[HAND STATE]
+T 190K
+G 0 T0@ [player total]
+G 0 T1@ [player aces]
+G 0 T2@ [dealer total]
+G 0 T3@ [dealer aces]
+
+[ADD CARD TO PLAYER]
+T 320K
+G 181@
+
+S 1
+T 1@
+G 1@
+P 323@ [if not ace, skip]
+
+G 181@
+S 11
+T 1@
+G 1@
+P 325@ [if <11 skip face logic]
+
+G 181@
+G 190@
+A
+T 190@
+
+E 320K
+
+[ACE]
+G 1 [ace counts as 11]
+G 190@
+A
+T 190@
+
+G 191@
+A 1
+T 191@
+
+E 320K
+
+[FACE CARD]
+G 10
+G 190@
+A
+T 190@
+E 320K
+
+[ADD CARD TO DEALER]
+T 340K
+G 181@
+
+S 1
+T 1@
+G 1@
+P 343@
+
+G 181@
+S 11
+T 1@
+G 1@
+P 345@
+
+G 181@
+G 192@
+A
+T 192@
+
+E 340K
+
+[ACE D]
+G 1
+G 192@
+A
+T 192@
+
+G 193@
+A 1
+T 193@
+
+E 340K
+
+[FACE D]
+G 10
+G 192@
+A
+T 192@
+
+E 340K
+
+[INITIAL DEAL]
+E 300K
+E 320K [player card 1]
+
+E 300K
+E 320K [player card 2]
+
+E 300K
+E 340K [dealer card 1]
+
+E 300K
+E 340K [dealer card 2]
+
+[PLAYER POINTS]
+T 195K
+G 100
+T 0@
+
+
+G 190@ [player points]
+O 1F   [print digit]
 
 
 
