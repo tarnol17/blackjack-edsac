@@ -5,9 +5,17 @@ PFGKIFAFRDLFUFOFE@A6FG@E8FEZPF
 @&#!!!!!!!!!!!!!*BLACKJACK!EDSAC
 @&#!!!!!!!*!!!!!!!!BY!TEAM!TBD
 @&#!
+@&#!*DEALER!DOES!NOT!HIT!ON!SOFT!SEVENTEEN
+@&#!
+@&#!*POINTS @&#!100
+@&#!*HIT!ONE
+@&#!*STAND!TWO
+@&#!!!!!!!!!!!*INPUT!
 ..PK
 
 T 64 K [ Set M ]
+G    K
+T 47 K
 P  7 @
 T    Z [ Restore theta ]
 T    F [ 0: Clear ACC]
@@ -27,9 +35,28 @@ G   0@ [ M(6) - menu item 6]
 G   0@ [ M(7) - menu item 7]
 G   0@ [ M(8) - menu item 8]
 G   0@ [ M(9) - menu item 9]
-G   0@ [ M(10) - menu item 10]
+G   0@ [ M(10)-menu item 10]
 
+T 90 K
+[ HIT ]
+G      K
+A   3  F [ 0 build the link ]
+T   3  @ [ 1 plant the link ]
+O   4  @ [ 2 print the character ]
+P      F [ 3 the link ]
+H      F [ 4 the letter H ]
 
+T 96 K
+[ STAND ]
+G      K
+A   3  F [ 0 build the link ]
+T   3  @ [ 1 plant the link ]
+O   4  @ [ 2 print the character ]
+P      F [ 3 the link ]
+T
+S      F [ 4 the letter S ]
+
+E 64 K PF
 
 [DECK POINTER]
 T 180K
@@ -235,4 +262,4 @@ O 1F   [print digit]
 
 
 
-E 64 K P F
+E 64 K P F 
