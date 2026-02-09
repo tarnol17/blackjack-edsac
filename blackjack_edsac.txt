@@ -14,18 +14,16 @@ PFGKIFAFRDLFUFOFE@A6FG@E8FEZPF
 ..PK
 
 T 64 K [ Set M ]
+
 G    K
 T 47 K
 P  7 @
 T    Z [ Restore theta ]
 T    F [ 0: Clear ACC]
 Z    F [ 1: Get dial input ]
-A    M [ 2: Add the original jump ]
-T  5 @ [ 3: Store the link to the jump table ]
-A  4 @ [ 4: pickup for wheeler jump ]
-P    F [ 5: Link into jump table ]
-E   0@ [ 6: Do it again ]
-G    M [ M(0) - Original Jump relative to M ]
+A  90E [ 2: Add base address of jump table ]
+T   5@ [ 2: Store the link to the jump table ]
+G   5@ [ 3: Jump to selected menu item based on input ]
 G  90F [ M(1) - menu item 1]
 G  96F [ M(2) - menu item 2]
 G   0@ [ M(3) - menu item 3]
@@ -42,26 +40,50 @@ T 90 K
 G      K
 A   3  F [ 0 build the link ]
 T   3  @ [ 1 plant the link ]
-O   4  @ [ 2 print the character ]
 P      F [ 3 the link ]
 H      F [ 4 the letter H ]
+
+E 300K [draw card]
+E 320K [add to player]
+E 360K [adjust aces]
+E 195K [print points]
+
+E 64 K PF [return to menu]
 
 T 96 K
 [ STAND ]
 G      K
 A   3  F [ 0 build the link ]
 T   3  @ [ 1 plant the link ]
-O   4  @ [ 2 print the character ]
 P      F [ 3 the link ]
-T
+
 S      F [ 4 the letter S ]
+
+E 380K [dealer turn]
+E 400K [compare hands]
+
+E 64 K PF
+
+[INITIAL DEAL]
+T 250K
+E 300K
+E 320K [player card 1]
+
+E 300K
+E 320K [player card 2]
+
+E 300K
+E 340K [dealer card 1]
+
+E 300K
+E 340K [dealer card 2]
 
 E 64 K PF
 
 [DECK POINTER]
 T 180K
 G 0
-T 0@
+T 180@
 
 [STORED DECK DATA]
 T 200 K
@@ -150,10 +172,10 @@ T 180@
 
 [HAND STATE]
 T 190K
-G 0 T0@ [player total]
-G 0 T1@ [player aces]
-G 0 T2@ [dealer total]
-G 0 T3@ [dealer aces]
+G 0 T190@ [player total]
+G 0 T191@ [player aces]
+G 0 T192@ [dealer total]
+G 0 T193@ [dealer aces]
 
 [ADD CARD TO PLAYER]
 T 320K
@@ -196,70 +218,63 @@ A
 T 190@
 E 320K
 
-[ADD CARD TO DEALER]
-T 340K
-G 181@
+[ADJUST ACES]
+T 360K
+G 190@
+S 21
+P 365@
 
+G 191@
+S 0
+P 365@
+
+G 190@
+S 10
+T 190@
+
+G 191@
 S 1
-T 1@
-G 1@
-P 343@
+T 191@
 
-G 181@
-S 11
-T 1@
-G 1@
-P 345@
+E 360K
 
-G 181@
-G 192@
-A
-T 192@
-
-E 340K
-
-[ACE D]
-G 1
-G 192@
-A
-T 192@
-
-G 193@
-A 1
-T 193@
-
-E 340K
-
-[FACE D]
-G 10
-G 192@
-A
-T 192@
-
-E 340K
-
-[INITIAL DEAL]
-E 300K
-E 320K [player card 1]
-
-E 300K
-E 320K [player card 2]
-
-E 300K
-E 340K [dealer card 1]
-
-E 300K
-E 340K [dealer card 2]
-
-[PLAYER POINTS]
+[PRINT PLAYER POINTS]
 T 195K
-G 100
-T 0@
+G 190@
+A 48
+O 1F
+E 195K
 
+[DEALER TURN]
+T 380K
+G 192@
+S 17
+P 385@
 
-G 190@ [player points]
-O 1F   [print digit]
+E 300K
+E 340K
+E 380K
 
+[COMPARE HANDS]
+T 400K
+G 190@
+S 21
+P 410@
 
+G 192@
+S 21
+P 405@
 
-E 64 K P F 
+G 190@
+S 192@
+P 415@
+
+G 76
+O 1F
+E 400K
+
+G 80
+O 1F
+E 400K
+
+Z F [halt program]
